@@ -6,12 +6,12 @@ const htmlRouter = express.Router();
 
 htmlRouter.get('/notes', (req, res, next) => {
     
-})
+}); 
 
 
 htmlRouter.get('/', (req, res, next) => {
 
-})
+}); 
 
 
 

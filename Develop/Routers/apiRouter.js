@@ -13,7 +13,19 @@ const express = require('express');
 const apiRouter = express.Router(); 
 
 
+apiRouter.get(`api/notes`, (req, res, next) =>{
 
+})
+
+
+apiRouter.post(`/api/notes`, (req, res, next) => {
+
+})
+
+
+apiRouter.delete(`/api/notes/:id`, (req, res, next) => {
+
+})
 
 
 
