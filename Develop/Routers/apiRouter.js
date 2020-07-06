@@ -12,11 +12,12 @@ const express = require('express');
 
 const apiRouter = express.Router();
 
+let id = 0;
 
 apiRouter.get(`/`, (req, res, next) => {
     // this is reading the application 
     fs.readFile(path.resolve(__dirname, "../db/db.json"), 'utf8', (err, data) => {
-        if (err) console.log(err.message); 
+        if (err) console.log(err.message);
         res.json(data);
     })
 })
@@ -26,30 +27,27 @@ apiRouter.get(`/`, (req, res, next) => {
 
 
 apiRouter.post(`/`, (req, res, next) => {
-    // this is the note that people can read and such 
-    let userNote = req.body; 
 
-    // const newMember = {
-    //     id: uuid.v4(),
-    //     name: req.body.name,
-    //     // email: req.body.email,
-    // }
-    // if (!newMember.name) {
-    //     return res.json({ msg: 'please enter a name' });
-    // } else {
-    //     member.push(newMember);
-    //     res.json(member);
-    // }
- 
+    // this is the note that people can read and such 
+    const userNote = {
+        id: id,
+        title: req.body.title,
+        text: req.body.text
+    }
+    // write to the file we might need to append 
+        member.push(newMember);
+
+    
+
     // fs.writeFile('message.txt', data, (err) => {
     //     if (err) throw err;
-        console.log(userNote);
+    console.log(userNote);
     //   });
 
+    // sending a new note to the user 
+    let newNote = { id: id += 1, title: "Test Title", text: "Test text" }
 
-    let newNote = {"title":'',"text": ''}
-    
-    res.sendStatus(200);  
+    res.sendStatus(200);
 })
 
 apiRouter.delete('/:id', (req, res) => {
@@ -61,7 +59,7 @@ apiRouter.delete('/:id', (req, res) => {
         // if the id doesn't match the one in req.params.id keep it 
         let result = member.filter(e => e.id !== parseInt(req.params.id));
         //show the new result array 
-        res.json({msg:'member deleted', result});
+        res.json({ msg: 'member deleted', result });
     } else {
         res.status(400).json({ msg: `sorry member with id:${req.params.id} does not exist` });
     }
