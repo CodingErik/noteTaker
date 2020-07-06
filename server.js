@@ -5,9 +5,13 @@ const app = express();
 const morgan = require('morgan'); 
 const _ = require('lodash'); 
 
-// require peopleRouter // import peopleRouter
-// const peopleRouter = require('./routers/peopleRouter'); 
-// const animalRouter = require('./routers/animalRouter'); 
+
+// require routers 
+// ****************************************
+const htmlRouter = require('./Develop/Routers/htmlRouter'); 
+const apiRouter = require('./Develop/Routers/apiRouter'); 
+// ****************************************
+
 
 
 const PORT = process.env.PORT || 8080;
@@ -28,9 +32,9 @@ app.use(morgan('dev'));
 // ROUTERS*********************************
 // here we set up the routers
 // mount 
-// app.use('/people', peopleRouter);
+app.use('/', htmlRouter);
 // mount 
-// app.use('/animal', animalRouter); 
+app.use('/api', apiRouter); 
 //*****************************************
 
 
