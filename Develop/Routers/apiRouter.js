@@ -10,11 +10,14 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const apiRouter = express.Router(); 
+const apiRouter = express.Router();
 
 
-apiRouter.get(`/notes`, (req, res, next) =>{
-
+apiRouter.get(`/notes`, (req, res, next) => {
+    fs.readFile(path.join(__dirname, "../db/db.json"), 'utf8', (err, data) => {
+        if (err) console.log(err.message); 
+        res.json(data);
+    })
 })
 
 
