@@ -5,12 +5,12 @@ const htmlRouter = express.Router();
 
 
 htmlRouter.get('/notes', (req, res, next) => {
-    
+    res.sendFile(path.join(__dirname, "../public/notes.html")); 
 }); 
 
 
 htmlRouter.get('/', (req, res, next) => {
-
+    res.sendFile(path.join(__dirname, "../public/index.html")); 
 }); 
 
 
