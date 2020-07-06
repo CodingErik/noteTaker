@@ -14,6 +14,7 @@ const apiRouter = express.Router();
 
 
 apiRouter.get(`/`, (req, res, next) => {
+    // this is reading the application 
     fs.readFile(path.resolve(__dirname, "../db/db.json"), 'utf8', (err, data) => {
         if (err) console.log(err.message); 
         res.json(data);
