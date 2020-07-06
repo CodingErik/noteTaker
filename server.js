@@ -14,7 +14,7 @@ const apiRouter = require('./Develop/Routers/apiRouter');
 
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 // MIDDLEWARE
 // ****************************************
@@ -31,9 +31,9 @@ app.use(morgan('dev'));
 
 // ROUTERS*********************************
 // here we set up the routers
-// mount 
+// mount htmlRouter
 app.use('/', htmlRouter);
-// mount 
+// mount apiRouter
 app.use('/api/notes', apiRouter); 
 //*****************************************
 

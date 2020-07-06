@@ -27,6 +27,18 @@ apiRouter.get(`/`, (req, res, next) => {
 apiRouter.post(`/`, (req, res, next) => {
     // this is the note that people can read and such 
     let userNote = req.body; 
+
+    // const newMember = {
+    //     id: uuid.v4(),
+    //     name: req.body.name,
+    //     // email: req.body.email,
+    // }
+    // if (!newMember.name) {
+    //     return res.json({ msg: 'please enter a name' });
+    // } else {
+    //     member.push(newMember);
+    //     res.json(member);
+    // }
  
     // fs.writeFile('message.txt', data, (err) => {
     //     if (err) throw err;
@@ -37,11 +49,6 @@ apiRouter.post(`/`, (req, res, next) => {
     let newNote = {"title":'',"text": ''}
     
     res.sendStatus(200);  
-})
-
-
-apiRouter.delete(`/:id`, (req, res, next) => {
-
 })
 
 apiRouter.delete('/:id', (req, res) => {
