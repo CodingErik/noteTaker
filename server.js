@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // this is for fancy json
 app.use(express.json());
 
 // to import website style
-app.use(express.static('Develop/public'));  // maybe assets 
+app.use(express.static('Develop/public'));  // maybe assets  // what happens when we take this off let's try it
 
 // setting up a small middleWare for testing
 app.use(morgan('dev'));
@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 // mount 
 app.use('/', htmlRouter);
 // mount 
-app.use('/api', apiRouter); 
+app.use('/api/notes', apiRouter); 
 //*****************************************
 
 

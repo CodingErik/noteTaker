@@ -13,7 +13,7 @@ const express = require('express');
 const apiRouter = express.Router();
 
 
-apiRouter.get(`/notes`, (req, res, next) => {
+apiRouter.get(`/`, (req, res, next) => {
     fs.readFile(path.resolve(__dirname, "../db/db.json"), 'utf8', (err, data) => {
         if (err) console.log(err.message); 
         res.json(data);
@@ -24,7 +24,7 @@ apiRouter.get(`/notes`, (req, res, next) => {
 // add it to the `db.json` file, and then return the new note to the client.
 
 
-apiRouter.post(`/notes`, (req, res, next) => {
+apiRouter.post(`/`, (req, res, next) => {
     // this is the note that people can read and such 
     let userNote = req.body; 
  
@@ -40,9 +40,24 @@ apiRouter.post(`/notes`, (req, res, next) => {
 })
 
 
-apiRouter.delete(`/notes/:id`, (req, res, next) => {
+apiRouter.delete(`/:id`, (req, res, next) => {
 
 })
+
+apiRouter.delete('/:id', (req, res) => {
+    // confirm id exists
+    const found = member.some(e => e.id === parseInt(req.params.id));
+
+    if (found) {
+        // loop through and take out that id 
+        // if the id doesn't match the one in req.params.id keep it 
+        let result = member.filter(e => e.id !== parseInt(req.params.id));
+        //show the new result array 
+        res.json({msg:'member deleted', result});
+    } else {
+        res.status(400).json({ msg: `sorry member with id:${req.params.id} does not exist` });
+    }
+});
 
 
 
