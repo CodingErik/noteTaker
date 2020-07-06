@@ -25,16 +25,18 @@ apiRouter.get(`/notes`, (req, res, next) => {
 
 
 apiRouter.post(`/notes`, (req, res, next) => {
-    let userNote = req.body; 
     // this is the note that people can read and such 
-    // console.log(userNote);
-    fs.writeFile('message.txt', data, (err) => {
-        if (err) throw err;
-        console.log('The file has been saved!');
-      });
+    let userNote = req.body; 
+ 
+    // fs.writeFile('message.txt', data, (err) => {
+    //     if (err) throw err;
+        console.log(userNote);
+    //   });
 
+
+    let newNote = {"title":'',"text": ''}
     
-    res.sendStatus(200); 
+    res.sendStatus(200);  
 })
 
 
