@@ -1,12 +1,20 @@
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const apiRouter = express.Router(); 
+const htmlRouter = express.Router(); 
+
+
+htmlRouter.get('/notes', (req, res, next) => {
+    
+})
+
+
+htmlRouter.get('/', (req, res, next) => {
+
+})
 
 
 
 
 
-
-module.exports = apiRouter; 
+module.exports = htmlRouter; 
