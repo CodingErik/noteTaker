@@ -12,13 +12,19 @@ const express = require('express');
 
 const apiRouter = express.Router();
 
-let id = 0;
+let id = 1;
 
+const dbDir = path.resolve(__dirname, "../db");
+
+// get the notes and read it 
 apiRouter.get(`/`, (req, res, next) => {
-    // this is reading the application 
-    fs.readFile(path.resolve(__dirname, "../db/db.json"), 'utf8', (err, data) => {
-        if (err) console.log(err.message);
-        res.json(data);
+    // this is reading the db 
+    fs.readFile(path.resolve(dbDir, "db.json"), 'utf8', (err, data) => {
+
+        // response to send back 
+        // this is the json data
+        //turned back to array so we can use it
+        res.json(JSON.parse(data)); 
     })
 })
 
@@ -27,29 +33,45 @@ apiRouter.get(`/`, (req, res, next) => {
 
 
 apiRouter.post(`/`, (req, res, next) => {
+    // path for where we are writting
+    let dataBase = path.resolve(__dirname, "../db");
 
-    // this is the note that people can read and such 
+    // saving all the user input  
     const userNote = {
         id: id,
         title: req.body.title,
         text: req.body.text
     }
-    // write to the file we might need to append 
-        member.push(newMember);
 
-    
-
-    // fs.writeFile('message.txt', data, (err) => {
-    //     if (err) throw err;
-    console.log(userNote);
-    //   });
-
-    // sending a new note to the user 
+    // making a new note to the user 
     let newNote = { id: id += 1, title: "Test Title", text: "Test text" }
 
-    res.sendStatus(200);
+    // here we read the file so that then we can add to it!!
+    let data = fs.readFileSync(path.resolve(dataBase, "db.json"), "utf8");
+    arr = JSON.parse(data);
+  
+    arr.push(userNote);
+
+    fs.writeFileSync(json,data)
+
+    // this is writting to the file  [okay this is writting to the file]
+    fs.writeFile(
+        path.resolve(dataBase, "db.json"),
+        JSON.stringify(arr) + '\n',
+        function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        }
+    );
+
+    // this returns the json to the user to see 
+    res.json(userNote);
 })
 
+
+
+// delete the note by id 
 apiRouter.delete('/:id', (req, res) => {
     // confirm id exists
     const found = member.some(e => e.id === parseInt(req.params.id));
