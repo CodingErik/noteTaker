@@ -14,6 +14,9 @@ const apiRouter = express.Router();
 
 let idNumber = 1;
 
+// path for where we are writting
+let dataBase = path.resolve(__dirname, "../db");
+
 const dbDir = path.resolve(__dirname, "../db");
 
 // get the notes and read it 
@@ -24,7 +27,7 @@ apiRouter.get(`/`, (req, res, next) => {
         // response to send back 
         // this is the json data
         //turned back to array so we can use it
-        res.json(JSON.parse(data)); 
+        res.json(JSON.parse(data));
     })
 })
 
@@ -33,9 +36,6 @@ apiRouter.get(`/`, (req, res, next) => {
 
 
 apiRouter.post(`/`, (req, res, next) => {
-    // path for where we are writting
-    let dataBase = path.resolve(__dirname, "../db");
-    
 
     // here we read the file so that then we can add to it!!
     let data = fs.readFileSync(path.resolve(dataBase, "db.json"), "utf8");
@@ -50,34 +50,83 @@ apiRouter.post(`/`, (req, res, next) => {
 
     arr.push(userNote);
 
-    fs.writeFileSync(path.resolve(dataBase, "db.json"),JSON.stringify(arr))
+    fs.writeFileSync(path.resolve(dataBase, "db.json"), JSON.stringify(arr))
 
 
     // this returns the json to the user to see 
     res.json(userNote);
 
     // add the next id
-    idNumber += 1; 
+    idNumber += 1;
 })
 
 
 
 // delete the note by id 
 apiRouter.delete('/:id', (req, res) => {
-    // confirm id exists
-    const found = member.some(e => e.id === parseInt(req.params.id));
 
-    if (found) {
-        // loop through and take out that id 
-        // if the id doesn't match the one in req.params.id keep it 
-        let result = member.filter(e => e.id !== parseInt(req.params.id));
-        //show the new result array 
-        res.json({ msg: 'member deleted', result });
-    } else {
-        res.status(400).json({ msg: `sorry member with id:${req.params.id} does not exist` });
+    // get the user request
+    // we parse because it is a string 
+    const deleteID = Number.parseInt(req.params.id);
+
+    console.log(deleteID);
+
+    // we read our file then parse becase it is a string 
+    // so we turn it to an array again 
+    let file = JSON.parse(fs.readFileSync(path.join(dataBase, 'db.json'), 'utf8'))
+
+    console.log('thisis file ', file)
+    // we filter the note that has the matching id 
+    // and create a new array with everything else
+    let newData = file.filter(e => !(e.id === deleteID));
+
+    console.log(newData)
+
+    // then we write the file with the new data 
+    fs.writeFileSync(path.join(dataBase, 'db.json'), JSON.stringify(newData))
+
+    res.json({msg:"done"});
+
+    {
+        //    // declaring an empty notesObject array
+        //    let notesObject = [];
+
+        //    // Used to read the notes from db.json
+        //    let data = fs.readFileSync(path.resolve(dbDir, "db.json"), "utf8");
+        //    notesObject = JSON.parse(data);
+
+        //    // temporary variable to keep track of index of note that needs to be deleted
+        //    let noteIndex = 0;
+        //    // for loop to delete note
+        //    for (var i = 0; i < notesObject.length; i++) {
+        //        if (notesObject[i].id === parseInt(req.params.id)) {
+        //            noteIndex = i;
+        //            break;
+        //        }
+        //    }
+        //    // splice method to target and delete specified note
+        //    notesObject.splice(noteIndex, 1);
+        //    // Used to overwrite db.json file to update notes in file
+        //    fs.writeFileSync(
+        //        path.resolve(dbDir, "db.json"),
+        //        JSON.stringify(notesObject),
+        //        function (err) {
+        //            if (err) {
+        //                return console.log(err);
+        //            }
+        //        }
+        //    );
+        //    res.json(true);
     }
 });
 
+// let file = JSON.parse(fs.readFileSync(path.join(dataBase, 'db.json'), 'utf8'))
+// console.log(file)
+
+// let newData = file.filter(e => !e.id === 0);
+
+// console.log(newData)
 
 
-module.exports = apiRouter; 
+module.exports = apiRouter;
+
