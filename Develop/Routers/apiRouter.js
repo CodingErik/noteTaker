@@ -17,12 +17,12 @@ let idNumber = 1;
 // path for where we are writting
 let dataBase = path.resolve(__dirname, "../db");
 
-const dbDir = path.resolve(__dirname, "../db");
+// these paths are getting hit 
 
 // get the notes and read it 
 apiRouter.get(`/`, (req, res, next) => {
     // this is reading the db 
-    fs.readFile(path.resolve(dbDir, "db.json"), 'utf8', (err, data) => {
+    fs.readFile(path.resolve(dataBase, "db.json"), 'utf8', (err, data) => {
 
         // response to send back 
         // this is the json data
@@ -33,8 +33,6 @@ apiRouter.get(`/`, (req, res, next) => {
 
 // Should receive a new note to save on the request body
 // add it to the `db.json` file, and then return the new note to the client.
-
-
 apiRouter.post(`/`, (req, res, next) => {
 
     // here we read the file so that then we can add to it!!
@@ -48,10 +46,12 @@ apiRouter.post(`/`, (req, res, next) => {
         text: req.body.text
     }
 
+    //just testing to see what the body gives us 
+    // console.log(req.body)
+
     arr.push(userNote);
 
     fs.writeFileSync(path.resolve(dataBase, "db.json"), JSON.stringify(arr))
-
 
     // this returns the json to the user to see 
     res.json(userNote);
@@ -64,68 +64,34 @@ apiRouter.post(`/`, (req, res, next) => {
 
 // delete the note by id 
 apiRouter.delete('/:id', (req, res) => {
-
     // get the user request
     // we parse because it is a string 
     const deleteID = Number.parseInt(req.params.id);
 
-    console.log(deleteID);
+    //testing
+    // console.log(deleteID);
 
     // we read our file then parse becase it is a string 
     // so we turn it to an array again 
     let file = JSON.parse(fs.readFileSync(path.join(dataBase, 'db.json'), 'utf8'))
+    
+    //testing
+    // console.log('thisis file ', file)
 
-    console.log('thisis file ', file)
     // we filter the note that has the matching id 
     // and create a new array with everything else
     let newData = file.filter(e => !(e.id === deleteID));
-
-    console.log(newData)
+    
+    //testing    
+    // console.log(newData)
 
     // then we write the file with the new data 
     fs.writeFileSync(path.join(dataBase, 'db.json'), JSON.stringify(newData))
 
     res.json({msg:"done"});
-
-    {
-        //    // declaring an empty notesObject array
-        //    let notesObject = [];
-
-        //    // Used to read the notes from db.json
-        //    let data = fs.readFileSync(path.resolve(dbDir, "db.json"), "utf8");
-        //    notesObject = JSON.parse(data);
-
-        //    // temporary variable to keep track of index of note that needs to be deleted
-        //    let noteIndex = 0;
-        //    // for loop to delete note
-        //    for (var i = 0; i < notesObject.length; i++) {
-        //        if (notesObject[i].id === parseInt(req.params.id)) {
-        //            noteIndex = i;
-        //            break;
-        //        }
-        //    }
-        //    // splice method to target and delete specified note
-        //    notesObject.splice(noteIndex, 1);
-        //    // Used to overwrite db.json file to update notes in file
-        //    fs.writeFileSync(
-        //        path.resolve(dbDir, "db.json"),
-        //        JSON.stringify(notesObject),
-        //        function (err) {
-        //            if (err) {
-        //                return console.log(err);
-        //            }
-        //        }
-        //    );
-        //    res.json(true);
-    }
 });
 
-// let file = JSON.parse(fs.readFileSync(path.join(dataBase, 'db.json'), 'utf8'))
-// console.log(file)
 
-// let newData = file.filter(e => !e.id === 0);
-
-// console.log(newData)
 
 
 module.exports = apiRouter;
