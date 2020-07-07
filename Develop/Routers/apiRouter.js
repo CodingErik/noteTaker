@@ -52,18 +52,8 @@ apiRouter.post(`/`, (req, res, next) => {
   
     arr.push(userNote);
 
-    fs.writeFileSync(json,data)
+    fs.writeFileSync(path.resolve(dataBase, "db.json"),JSON.stringify(arr))
 
-    // this is writting to the file  [okay this is writting to the file]
-    fs.writeFile(
-        path.resolve(dataBase, "db.json"),
-        JSON.stringify(arr) + '\n',
-        function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        }
-    );
 
     // this returns the json to the user to see 
     res.json(userNote);
