@@ -12,7 +12,7 @@ const express = require('express');
 
 const apiRouter = express.Router();
 
-let id = 1;
+let idNumber = 1;
 
 const dbDir = path.resolve(__dirname, "../db");
 
@@ -35,21 +35,19 @@ apiRouter.get(`/`, (req, res, next) => {
 apiRouter.post(`/`, (req, res, next) => {
     // path for where we are writting
     let dataBase = path.resolve(__dirname, "../db");
+    
+
+    // here we read the file so that then we can add to it!!
+    let data = fs.readFileSync(path.resolve(dataBase, "db.json"), "utf8");
+    let arr = JSON.parse(data);
 
     // saving all the user input  
     const userNote = {
-        id: id,
+        id: idNumber,
         title: req.body.title,
         text: req.body.text
     }
 
-    // making a new note to the user 
-    let newNote = { id: id += 1, title: "Test Title", text: "Test text" }
-
-    // here we read the file so that then we can add to it!!
-    let data = fs.readFileSync(path.resolve(dataBase, "db.json"), "utf8");
-    arr = JSON.parse(data);
-  
     arr.push(userNote);
 
     fs.writeFileSync(path.resolve(dataBase, "db.json"),JSON.stringify(arr))
@@ -57,6 +55,9 @@ apiRouter.post(`/`, (req, res, next) => {
 
     // this returns the json to the user to see 
     res.json(userNote);
+
+    // add the next id
+    idNumber += 1; 
 })
 
 
