@@ -50,7 +50,7 @@ Application should allow users to delete previously saved notes.
 
 ## Deployed link 
 
-You can see the live heroku app here (https://notestakerr.herokuapp.com/)
+You can see the live heroku app here [note taker](https://notestakerr.herokuapp.com/)
 
 
 
