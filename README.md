@@ -35,6 +35,6 @@ Application should allow users to delete previously saved notes.
 
 [Heroku Guide](../04-Supplemental/HerokuGuide.md)
 
-## Commit Early and Often
+
 
 
