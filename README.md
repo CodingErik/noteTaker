@@ -52,5 +52,11 @@ Application should allow users to delete previously saved notes.
 
 You can see the live heroku app here [note taker](https://notestakerr.herokuapp.com/)
 
+## Installation
 
+to run the application run ```git clone``` run  ```npm i ```then run the script ```npm run start ```
+
+## Contribution 
+
+If you would like to contribute to the repo please submit a pull request. 
 
