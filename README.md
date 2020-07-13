@@ -1,6 +1,6 @@
 # Note Taker
 
-![GitHub Language Count](https://img.shields.io/github/languages/count/codingErik/teamGenerator?label=Languages%20Used&logo=GitHub)
+![GitHub Language Count](https://img.shields.io/github/languages/count/codingErik/noteTaker?label=Languages%20Used&logo=GitHub)
 ![GitHub Followers](https://img.shields.io/github/followers/codingErik?color=orange&label=Followers&logo=GitHub)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Tweet](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FCodingErik%2FteamGenerator)
