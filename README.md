@@ -48,9 +48,9 @@ Application should allow users to view previously saved notes.
 
 Application should allow users to delete previously saved notes.
 
-## Deploying the App
+## Deployed link 
 
-You will not be able to deploy your server side code on GitHub pages. This app should be deployed on Heroku. Carefully follow the [Heroku Guide](../04-Supplemental/HerokuGuide.md) for getting your app deployed on Heroku.
+You can see the live heroku app here ![note taker](https://notestakerr.herokuapp.com/)
 
 
 
